@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <!-- bootstrap dependencies -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark">
+    <a class="navbar-brand" href="index.html">The Game Map</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- nav menu if needed in the future -->
+      </ul>
+      <form onsubmit="searchLoad(); return false" class="form-inline my-2 my-lg-0">
+        <input id="search-input" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search games..."
+          aria-label="Search">
+        <button class="search-button" type="submit"></button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="games-content">
+
+    <div class="row">
+
+      <div class="col-12 col-sm-2 genres">
+        <div class="margin">
+          <h2>Genres</h2>
+          <div id="genres-content">
+            <button class="">loading</button>
+          </div>
+        </div>
+        <div class="margin">
+          <h2>Platforms</h2>
+          <div id="platforms-content">
+            <button class="">loading</button>
+          </div>
+        </div>
+        <div class="margin">
+          <h2>Developers</h2>
+          <div id="developers-content">
+            <button class="">loading</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-10">
+
+        <h2 class="margin margin-top"><span onclick="fetchDefaultGames(updateGames)">Games</span> > <span
+            id="games-title">loading</span></h2>
+
+        <div class="row justify-content-around" id="games-row-content">
+
+          <!-- Game Card Template -->
+          <template id="card-template">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <div class="card">
+                <div class="content">
+                  <div class="front" data-is="frontground-card">
+                    <div class="img-overlay" data-is="overlay-card">
+                      <div class="full-bottom">
+                        <div class="margin">
+                          <h2 class="tactile-shadow" data-content="title">Front</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="back" data-is="background-card">
+                    <div class="margin">
+                      <p class="max-3-lines">GENRE <b><span class="accent" data-content="genre">Action</span></b></p>
+                      <p>RELEASED <b><span class="accent" data-content="release">1999</span></b></p>
+                      <p class="max-3-lines">PLATFORMS <b><span class="accent" data-content="platforms">Games games
+                            games</span></b></p>
+                      <p class="no-margin center">RATING </p>
+                      <span class="center big-font" data-content="rating">78</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal Game Info -->
+  <div class="modal fade" id="modal-game-info" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Game title</h4>
+          <button type="button" class="" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="margin">
+            <video id="modal-video" autoplay loop>
+              <source src="" type="video/mp4">
+              Your browser does not support video.
+            </video>
+            <br>
+            <p>GENRES <span class="accent" id="modal-genres"></span></p>
+            <p>DEVELOPERS <span class="accent" id="modal-developers"></span></p>
+            <p>RATING <span class="accent" id="modal-rating"></span> - METACRITIC <span class="accent"
+                id="modal-metacritic"></span></p>
+            <p>PLATFORMS <span class="accent" id="modal-platforms"></span></p>
+            <p>AVAILIABLE ON <span class="accent" id="modal-stores"></span></p>
+            <p>RELEASE <span class="accent" id="modal-released"></span></p>
+            <hr>
+            <p class="modal-description">Content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal End -->
+
+  <!-- Footer -->
+  <footer>
+
+    <p>Games information from <a target="_blank" href="https://rawg.io/">rawg.io</a></p>
+
+  </footer>
+  <!-- Footer End -->
+
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/fetching.js"></script>
+  <script src="js/content.js"></script>
+
+</body>
+
+</html>
