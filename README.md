@@ -16,7 +16,7 @@ A dynamic generated web that takes games data from an API and shows the info to 
       - Search and filter content
 
 
-#### [Youtube video showing its functionality](http://)
+#### [Youtube video showing its functionality](https://youtu.be/IxpLqgRYjMY)
 
 The Games Map was a **collaborative** class project along two other classmates. Our vision was to create a simple to use and atractive website where anyone could **explore and find** new video games.
 
